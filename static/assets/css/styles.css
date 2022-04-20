@@ -1,0 +1,108 @@
+#product-dropdown, #area-dropdown {
+    background: #ffffff;
+    border: none;
+    border-bottom: 1px solid #dfe7f1;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+    text-indent: 8px;
+    height: 42px;
+    width: 80%;
+  }
+  
+  #qty-input {
+    background: #fff;
+    border: none;
+    border-bottom: 1px solid #dfe7f1;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+    text-indent: 8px;
+    height: 42px;
+    width: 80%;
+  }
+  
+  #add-btn {
+    color: #7dc454;
+    border: 1px solid #7dc454;
+    height: 3rem;
+    border-radius: 5rem;
+    margin-left: 15%;
+    transition: all 0.3s ease-in;
+  }
+  
+  #add-btn:hover {
+    background: #7dc454;
+    color: white;
+  }
+
+  #gen-btn {
+    color: #fff;
+    background-color: #7dc454;
+    height: 3rem;
+    border-radius: 5rem;
+    margin-left: 15%;
+    transition: all 0.3s ease-in;
+  }
+  
+  #gen-btn:hover {
+    background: #ffffff;
+    border: 1px solid #7dc454;
+    color: #7dc454;
+  }
+
+  #job-name-input {
+    background: #fff;
+    border: none;
+    border-bottom: 1px solid #dfe7f1;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+    text-indent: 8px;
+    height: 42px;
+    width: 80%;
+  }
+  #selected-product-div-inner{
+    height: 30vh;
+    overflow-y: scroll;
+}
+.label {
+    text-decoration: underline;
+    text-decoration-color: #7dc454;
+    text-decoration-thickness: 2px;
+    font-size: large;
+}
+
+#selected-product-div-inner input[type="number"]{
+    width: 3rem;
+}
+
+#add-product-div, #selected-product-div-outer {
+    text-align: center;
+}
+  /* Changing scroll bar */
+  
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+
+

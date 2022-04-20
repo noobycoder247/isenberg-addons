@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load static %}
+    {% block content %}
+        <div class="text-center" id="hero" style="background-image: linear-gradient(rgba(163,162,162, 0.5), rgba(0,0,0,0.5)), url({% static '/assets/img/i5.jpg' %});">
+            <h1 id="div-heading" style="color: rgb(251,251,251);padding-top: 18%;font-size: 5rem;">Get Your Quotation Now!!!</h1><a id="get-quote-btn" class="btn" href="{% url 'quote_view' %}">&gt;</a>
+        </div>
+    {% endblock %}

@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static  '/assets/bootstrap/css/bootstrap.min.css'%}">
+    <title>Isenberg</title>
+    <style>
+        *{
+            font-family: Roboto, sans-serif;
+        }
+        table {
+            text-align: center;
+        }
+        .float-container {
+        border: 3px solid #fff;
+        display: inline;
+        }
+
+        .float-child-1 {
+            width: 60%;
+            float: left;
+        }
+        .float-child-2 {
+            width: 40%;
+            float: left;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 35px;
+            margin-bottom: 35px;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="width: 100%; border: 0 white" class="table table-borderless">
+        <tr>
+            <td>Quote: </td>
+            <td>{{ quote.id }}</td>
+            <td>Job Name: </td>
+            <td>{{ quote.job_name }}</td>
+        </tr>
+        <tr>
+            <td>Quote Date: </td>
+            <td>{{ quote.created }}</td>
+            <td>Quote Valid till: </td>
+            <td>{{ quote.created }}</td>
+        </tr>
+    </table>
+    <hr style="border:1px solid #000; margin-bottom:0!important;">
+    <h1> Quotation Summary </h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr style="background-color: #7c7a7a; font-weight: bold">
+                <th scope="col">Area</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        {% for key, value in all_area_summary.items %}
+        <tr>
+            <td>
+                {{ key }}
+            </td>
+            <td>
+                $ {{ value }}
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td style="background-color: #eeeeee">$ {{ all_area_summary_total }}</td>
+        </tr>
+    </table>
+    <p style="page-break-after: always"></p>
+
+    {% for k, v in line_items.items %}
+    <h1>{{ k }} Summary</h1>
+    <table class="table w-100">
+        <tr style="background-color: #7c7a7a; font-weight: bold">
+            <td>
+                Model#
+            </td>
+            <td style="width: 50%">
+                Description
+            </td>
+            <td>
+                Finish
+            </td>
+            <td>
+                List Price
+            </td>
+            <td>
+                Qty
+            </td>
+        </tr>
+        {% for item in v %}
+
+        <tr>
+            <td>{{ item.product.model_no }}</td>
+            <td style="width: 50%">
+                {{ item.product.description }}
+            </td>
+            <td>
+                {{ item.product.finish }}
+            </td>
+            <td>
+                $ {{ item.product.list_price }}
+            </td>
+            <td>
+                {{ item.qty }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p style="page-break-after: always"></p>
+    <h1>{{ k }} Detail</h1>
+    {% for item in v %}
+    <h2 style="text-decoration: underline">Model# {{ item.product.model_no }}</h2>
+
+    <div class="float-container">
+{#        <div class="row">#}
+            <div class="float-child-1">
+                <table class="table">
+                    <tr style="background-color: #7c7a7a; font-weight: bold">
+                        <td>Description</td>
+                        <td>
+                            Finish
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ item.product.description }}</td>
+                        <td>{{ item.product.finish }}</td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr style="background-color: #7c7a7a; font-weight: bold">
+                        <td>List Price</td>
+                        <td>
+                            QTY
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>$ {{ item.product.list_price }}</td>
+                        <td>{{ item.qty }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="float-child-2">
+                <img src="{{ item.product.get_product_photo }}" width="100%" style="margin-left: 1px;">
+            </div>
+{#        </div>#}
+
+    </div>
+
+
+    <hr style="border:1px solid #000000; margin-bottom:0!important;">
+    {% endfor %}
+    {% endfor %}
+</body>
+
+</html>

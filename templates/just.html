@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row" style="margin-top: 3%;margin-bottom: 3%;">
+            <div class="col-md-6" id="add-product-div">
+                <form>
+                    {% csrf_token %}
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>
+                                <p class="label">
+                                    Product:
+                                </p>
+                            </td>
+                            <td>
+                                <select name="products" id="product-dropdown">
+                                    <optgroup>
+                                        {% for product in products %}
+                                            <option value="{{ product.id }}">{{ product.model_no }}</option>
+                                        {% endfor %}
+                                    </optgroup>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="label">
+                                    Area:
+                                </p>
+                            </td>
+                            <td>
+                                <select name="area" id="area-dropdown">
+                                    <optgroup>
+                                        {% for area in areas %}
+                                            <option value="{{ area.id }}">{{ area.area }}</option>
+                                        {% endfor %}
+                                    </optgroup>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="label">
+                                    Quantity:
+                                </p>
+                            </td>
+                            <td>
+                                <input type="number" id="qty-input" name="quantity" placeholder="Quantity" value="1" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button id="add-btn" class="btn">Add Product</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="col-md-6" id="selected-product-div-outer">
+                <form method="post" id="main-form">
+                    {% csrf_token %}
+                    <table class="table table-borderless">
+
+                        <tr>
+                            <td>
+                                <p class="label">
+                                    Job Name
+                                </p>
+                            </td>
+                            <td>
+                                <input type="text" name="job-name" id="job-name-input" class="form-control" placeholder="Job Name / Company Name">
+                            </td>
+
+                            <tr>
+                                <td>
+                                    <p class="label">
+                                        Selected Product
+                                    </p>
+                                </td>
+
+                                <td>
+                                    <div id="selected-product-div-inner">
+                                        <table id="selected-product-table">
+
+                                        </table>
+                                </div>
+                            </tr>
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="submit" class="btn" id="gen-btn" value="Get Quotation">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function() {
+        $('#product-dropdown').select2();
+        });
+    </script>
+    <script>
+    console.log("yo levi")
+    var count = 1
+    $(document).ready(function () {
+      $("#add-btn").on("click", function (e) {
+        e.preventDefault();
+        var value1 = $('#product-dropdown option:selected').val();
+        var value2 = $('#area-dropdown option:selected').val();
+        var value3 = $('#qty-input').val();
+
+        var txt1 = $('#product-dropdown option:selected').text();
+        var txt2 = $('#area-dropdown option:selected').text();
+        var txt3 = $('#qty-input').val();
+
+        console.log(value1, value2)
+        $('#selected-product-table').prepend(`<tr>
+                                            <input type="hidden" value="${value1}" name="product_${count}"/>
+                                            <input type="hidden" value="${value2}" name="area_${count}"/>
+                                            <input type="hidden" value="${value3}" name="qty_${count}" />
+                                            <td style="border: 1px solid grey"> <p style="margin:10px;">${txt1}</p> </td>
+                                            <td style="border: 1px solid grey"> <p style="margin:10px;">${txt2}</p> </td>
+                                            <td style="border: 1px solid grey"> <p style="margin:10px;">${txt3}</p> </td>
+                                            <td><a class="btn btn-danger remove-btn" id="xyz">X</a></td>
+                                        </tr>`)
+          count++;
+      })
+
+      {#$("#gen-btn").on("click", function (e) {#}
+      {#  e.preventDefault();#}
+      {#  var data = $('#main-form').serializeArray()#}
+      {#  console.log(data)#}
+      {#  $.ajax(#}
+      {#  {#}
+      {#      type:"POST",#}
+      {#      url: "{% url 'quote_view' %}",#}
+      {#      data:data,#}
+      {#      success: function( data )#}
+      {#      {#}
+      {#          console.log("done")#}
+      {#      }#}
+      {#   })#}
+      //})
+
+        $('#selected-product-table').on("click", ".remove-btn", function(e) {
+        e.preventDefault();
+        console.log("remove");
+        $(this).parent('td').parent('tr').remove();
+    })
+
+    })
+  </script>
+{% endblock %}

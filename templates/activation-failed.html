@@ -1,0 +1,7 @@
+{% autoescape off %}
+    {% if password_reset %}
+        Hey you can't reset password for now. Please try again later or contact us.
+    {% else %}
+        Activation Failed
+    {% endif %}
+{% endautoescape %}

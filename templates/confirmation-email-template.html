@@ -1,0 +1,6 @@
+{% autoescape off %}
+Hey there !!!
+    This is confirmation mail from Isenberg.
+    Please click this link and activate your account
+    Confirmation Link = http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}
